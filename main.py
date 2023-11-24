@@ -1,16 +1,41 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+from download_img import download_img
+from excel_parser import get_data_in_excel
+from path_check import path_check_and_create
+from multiprocessing import Process
 
 
-# Press the green button in the gutter to run the script.
+def full_download_img(data) -> None:
+    for i in data:
+        url, name, sava_path = i
+
+        path_check_and_create(sava_path)
+        download_img(url, name, sava_path)
+
+
+def main(data):
+    list_processing = []
+    while data:
+        for x in range(6):
+            data_list = [data.pop() for _ in range(12) if len(data)]
+            if data_list:
+                p = Process(target=full_download_img, args=(data_list,), daemon=True, name=f"PhotoKax{x}")
+                list_processing.append(p)
+                p.start()
+
+        for proc in list_processing:
+            proc.join()
+            list_processing.remove(proc)
+
+
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    path = input(r"Путь к файлу excel: ")
+    res = get_data_in_excel(r"D:\pythonProject\Oleg - UploadImageViaLink\данные\ф100.xlsx")
+    main(res)
