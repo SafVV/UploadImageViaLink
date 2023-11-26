@@ -1,0 +1,89 @@
+{
+ "version": "auto-py-to-exe-configuration_v1",
+ "pyinstallerOptions": [
+  {
+   "optionDest": "noconfirm",
+   "value": true
+  },
+  {
+   "optionDest": "filenames",
+   "value": "D:/pythonProject/Oleg - UploadImageViaLink/main.py"
+  },
+  {
+   "optionDest": "onefile",
+   "value": true
+  },
+  {
+   "optionDest": "console",
+   "value": true
+  },
+  {
+   "optionDest": "name",
+   "value": "UploadImageViaLink"
+  },
+  {
+   "optionDest": "clean_build",
+   "value": false
+  },
+  {
+   "optionDest": "strip",
+   "value": false
+  },
+  {
+   "optionDest": "noupx",
+   "value": false
+  },
+  {
+   "optionDest": "disable_windowed_traceback",
+   "value": false
+  },
+  {
+   "optionDest": "uac_admin",
+   "value": false
+  },
+  {
+   "optionDest": "uac_uiaccess",
+   "value": false
+  },
+  {
+   "optionDest": "argv_emulation",
+   "value": false
+  },
+  {
+   "optionDest": "bootloader_ignore_signals",
+   "value": false
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/pythonProject/Oleg - UploadImageViaLink/download_img.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/pythonProject/Oleg - UploadImageViaLink/excel_parser.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/pythonProject/Oleg - UploadImageViaLink/path_check.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/pythonProject/Oleg - UploadImageViaLink/venv/Lib/site-packages/tqdm;tqdm/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/pythonProject/Oleg - UploadImageViaLink/venv/Lib/site-packages/loguru;loguru/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/pythonProject/Oleg - UploadImageViaLink/main.py;."
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "loguru"
+  }
+ ],
+ "nonPyinstallerOptions": {
+  "increaseRecursionLimit": true,
+  "manualArguments": ""
+ }
+}

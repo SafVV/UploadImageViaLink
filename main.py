@@ -1,11 +1,15 @@
+import multiprocessing
+import os
+import sys
 import time
+from multiprocessing import Process
+
+from loguru import logger
+from tqdm import tqdm
 
 from download_img import download_img
 from excel_parser import get_data_in_excel
 from path_check import path_check_and_create
-from multiprocessing import Process
-from loguru import logger
-from tqdm import tqdm
 
 
 @logger.catch(reraise=True)
@@ -19,7 +23,7 @@ def full_download_img(data) -> None:
 @logger.catch(reraise=True)
 def main(data):
 
-    pbar = tqdm(total=len(data), colour="green", desc="Прогресс: ", ncols=150)
+    pbar = tqdm(total=len(data), colour="green", desc="Прогресс:")
 
     list_processing = []
     while data or list_processing:
@@ -42,13 +46,17 @@ def main(data):
     pbar.close()
 
 
+
+
+
 if __name__ == '__main__':
+    multiprocessing.freeze_support() # Для пуинсталлера в одну папку
     # Регистрация логера
     logger.remove()
     logger.add('logs/logs.log', level='DEBUG', rotation="5 MB", compression="zip", format="{time} {level} {message}",
-               enqueue=True, colorize=True)
+               enqueue=True, diagnose=True)
 
-    path = input(r"Путь к файлу excel: ")
+    path = input("Cсылка на фаил Эксель: ")
     res = get_data_in_excel(path)
     main(res)
 
