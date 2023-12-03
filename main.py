@@ -10,14 +10,15 @@ from tqdm import tqdm
 from download_img import download_img
 from excel_parser import get_data_in_excel
 from path_check import path_check_and_create
+import easygui
 
 
 @logger.catch(reraise=True)
-def full_download_img(data) -> None:
+def full_download_img(data, loggers) -> None:
     for i in data:
         url, name, sava_path = i
         path_check_and_create(sava_path)
-        download_img(url, name, sava_path)
+        download_img(url, name, sava_path, loggers)
 
 
 @logger.catch(reraise=True)
@@ -35,7 +36,7 @@ def main(data):
                 pbar.update(len(data_list))
 
                 if data_list:
-                    p = Process(target=full_download_img, args=(data_list,), daemon=True)
+                    p = Process(target=full_download_img, args=(data_list, logger), daemon=True)
                     list_processing.append(p)
                     p.start()
 
@@ -56,10 +57,13 @@ if __name__ == '__main__':
     logger.add('logs/logs.log', level='DEBUG', rotation="5 MB", compression="zip", format="{time} {level} {message}",
                enqueue=True, diagnose=True)
 
-    path = input("Cсылка на фаил Эксель: ")
+
+    print("Cсылка на фаил Эксель:")
+    path = easygui.fileopenbox("Фаил Excel")
     res = get_data_in_excel(path)
     main(res)
 
+    logger.warning("Работа завершена")
     print("Работа завершена")
     input()
 

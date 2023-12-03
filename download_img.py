@@ -3,10 +3,10 @@ from loguru import logger
 
 
 @logger.catch(reraise=True)
-def download_img(url: str, name: str, save_path: str) -> None:
+def download_img(url: str, name: str, save_path: str, logger) -> None:
     try:
-        logger.remove()
-        logger.add('logs/logs.log', level='DEBUG', rotation="5 MB", compression="zip", format="{time} {level} {message}", colorize=True)
+        # logger.remove()
+        # logger.add('logs/logs.log', level='DEBUG', rotation="5 MB", compression="zip", format="{time} {level} {message}", colorize=True, enqueue=True)
 
         p = requests.get(url)
         out = open(save_path + name, "wb")
